@@ -1,0 +1,68 @@
+<div class="registration-form">
+    <h3>Registro</h3>
+
+    <form [formGroup]="clientForm" (ngSubmit)="registerClient()" class="form-container">
+        <div class="form-group">
+            <label for="token">Token:</label>
+            <input id="token" name="token" type="text" formControlName="token" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="name">Nombre:</label>
+            <input id="name" type="text" formControlName="name" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input id="email" type="text" formControlName="email" class="form-control">
+        </div>
+
+        <button type="submit" class="btn-register">Registrar</button>
+    </form>
+</div>
+
+<style>
+    .registration-form {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .btn-register {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .btn-register:hover {
+        background-color: #45a049;
+    }
+</style>
