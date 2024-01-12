@@ -14,7 +14,7 @@ export class ClientsComponent implements OnInit {
   constructor(private sdkService: SdkService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
-    this.getToken();
+    this.loadToken();
   }
 
   clientForm = new FormGroup({
@@ -23,14 +23,16 @@ export class ClientsComponent implements OnInit {
     token: new FormControl(''),
   });
 
-  getToken() {
-    this.sdkService.getToken().subscribe((data: any) => {
-      this.clientForm.setValue({
-        token: data.value,
-        email: '',
-        name: '',
+  loadToken() {
+    this.sdkService
+      .getToken()
+      .subscribe((data: { value: string; active: boolean }) => {
+        this.clientForm.setValue({
+          token: data.value,
+          email: '',
+          name: '',
+        });
       });
-    });
   }
 
   registerClient() {
@@ -41,13 +43,13 @@ export class ClientsComponent implements OnInit {
         token: this.clientForm.value.token,
       })
       .subscribe({
-        next: (data: any) => {
+        next: (data: { message: string; data: any }) => {
           this.clientForm.setValue({
             token: this.clientForm.value.token!,
             email: '',
             name: '',
           });
-          this.toastr.success('Cliente registrado', 'Ok');
+          this.toastr.success(data.message, 'Message');
         },
         error: (error: any) => {
           if (error.status === 401) {
